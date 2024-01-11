@@ -19,10 +19,10 @@ const char *password = PASSWORD;  // Wi-Fi接続のパスワード
 #include <Time.h>
 #include <TimeLib.h>
 
-#define LCD_WIDTH (320)       // LCDの横ドット数(M5Stack)
-#define LCD_HEIGHT (240)      // LCDの縦ドット数(M5Stack)
-#define DISPLAY_COUNT (3000)  // LCD点灯時間(だいたい秒)
-#define CHECK_INTERVAL (3)    // チェック間隔(だいたい秒)
+#define LCD_WIDTH (320)      // LCDの横ドット数(M5Stack)
+#define LCD_HEIGHT (240)     // LCDの縦ドット数(M5Stack)
+#define DISPLAY_COUNT (120)  // LCD点灯時間(だいたい秒)
+#define CHECK_INTERVAL (3)   // チェック間隔(だいたい秒)
 
 unsigned long file_buffer_size;    // ダウンロードしたサイズ
 unsigned char file_buffer[51000];  // ダウンロード用のバッファ
@@ -374,12 +374,10 @@ void setup() {
 
   // サーバから日本地図を取得しスプライトとして描画
   file_buffer_size = sizeof(file_buffer);
-  printf("1\n");
   if (doHttpGet("http://www.kmoni.bosai.go.jp/data/map_img/CommonImg_noto/"
                 "base_map_w.gif",
                 file_buffer, &file_buffer_size) != 0) {
     M5.Lcd.println("Map download failed");
-    printf("-1\n");
     return;
   }
 
