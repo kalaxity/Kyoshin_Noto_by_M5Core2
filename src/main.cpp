@@ -25,7 +25,7 @@ const char *password = PASSWORD;  // Wi-Fi接続のパスワード
 #define CHECK_INTERVAL (3)   // チェック間隔(だいたい秒)
 
 unsigned long file_buffer_size;    // ダウンロードしたサイズ
-unsigned char file_buffer[51000];  // ダウンロード用のバッファ
+unsigned char file_buffer[30000];  // ダウンロード用のバッファ
 
 const char *ntpServer = "ntp.jst.mfeed.ad.jp";  // NTPサーバ名
 const long gmtOffset_sec = 9 * 60 * 60;         // GMTとJSTの時差
@@ -374,8 +374,7 @@ void setup() {
 
   // サーバから日本地図を取得しスプライトとして描画
   file_buffer_size = sizeof(file_buffer);
-  if (doHttpGet("http://www.kmoni.bosai.go.jp/data/map_img/CommonImg_noto/"
-                "base_map_w.gif",
+  if (doHttpGet("https://raw.githubusercontent.com/kalaxity/Kyoshin_Noto_by_M5Core2/refs/heads/main/image/base_map_w.gif",
                 file_buffer, &file_buffer_size) != 0) {
     M5.Lcd.println("Map download failed");
     return;
